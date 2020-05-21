@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>像素鸟</title>
+		<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link rel='stylesheet' type='text/css' href='css/index.css'>
+	</head>
+	<body>
+		<div id='info'>
+			<a href='javascript:' id='ranking' data-toggle="modal" data-target=".m1">排行榜</a>
+			<a href='javascript:' id='init'>开始游戏</a>
+			<a href='javascript:' id='again'>重新开始</a>
+			<a href='javascript:' id='stop'>暂停游戏</a>
+			<a href='javascript:' id='simple'>简单</a>
+			<a href='javascript:' id='common'>普通</a>
+			<a href='javascript:' id='hard'>困难</a>
+			&nbsp;&nbsp;&nbsp;
+			<span id='txt'>目前是<span id='nd'>普通</span>难度</span>
+		</div>
+		<div id='parent'></div>
+		<!-- 排行榜 -->
+		<div class="modal fade m1" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">排行榜</h4>
+					</div>
+					<div class="modal-body text-center">
+						<table class="table table-bordered">
+
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-default btn2" data-dismiss="modal">清空排名</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<!-- /排行榜 -->
+		<!-- 游戏结束时记录数据 -->
+		<form id='form'>
+			<div class="form-group">
+				<label for="exampleInputName">姓名</label>
+				<input type="text" class="form-control" id="exampleInputName" placeholder="姓名,输入完成之后不要回车,回车没成绩!!">
+			</div>
+			<a href='javascript:;' type="submit" class="btn1 btn btn-default">确认</a>
+		</form>
+		<!-- /Game Over -->
+
+		<script type='text/javascript' src='lib/jquery/jquery.min.js'></script>
+		<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+		<script type='text/javascript' src='js/back.js'></script>
+		<script type='text/javascript' src='js/bird.js'></script>
+		<script type='text/javascript' src='js/pillar.js'></script>
+		<script type='text/javascript' src='js/Game.js'></script>
+	</body>
+</html>
