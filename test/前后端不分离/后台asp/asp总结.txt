@@ -1,0 +1,480 @@
+【第一节课内容】
+编写ASP代码的头尾应用<%……%>标记。
+response.write "显示的内容"
+也可以这样写：
+response.write("显示的内容")
+如：
+<%
+response.write "你好吗？"
+%>
+说明：response.write是输出显示的意思。
+可以用=号简略。
+如：
+<%="我真的很好！"%>
+如果用=号简略的话，需要将<%%>标记写在同一行，而且要一行行输出不同的文字。
+如：
+<%="你好吗？"%>
+<%="我很好！"%>
+……
+aws.exe（小型ASP服务器）需要放在网页的根目录下运行，运行后在浏览器中输入本地的网址：127.0.0.1即可。
+输出显示时，如果是调用常量或变量的结果，不要加引号。如果是直接显示的结果，需要加引号。
+如：
+<%
+aa="莆田"
+ab="恒心"
+ac="电脑"
+ad="学校"
+response.write "输出的结果是："&aa&ab&ac&ad&"<br>"
+response.write "简单的结果是："&ab&ad
+%>
+意思是：分别对aa、ab、ac、ad定义内容，然后分二行显示出来。
+显示的结果是：
+输出的结果是：莆田恒心电脑学校
+简单的结果是：恒心学校 
+我们可以看到上面的aa/ab/ac/ad都没加引号，不过中间要用&号合并起来。
+
+【第二节课内容】
+用response.write输出html代码时，如果html代码中带有双引号的，需要再多加个双引号。
+如：
+<%
+response.write "<img src=""a.jpg"">"
+%>
+说明：可以显示一张图片a.jpg出来，在html代码中插入图片的代码是：<img src="a.jpg">但在ASP中，可以看到a.jpg的头尾有2对双引号。
+以上的代码也可以简略为：
+<%="<img src=""a.jpg"">"%>
+意思相同。
+如果用变量去控制图片的大小，如：
+<%
+aa=200
+ab=2
+response.write "<img src=""a.jpg"" width="""&aa&""" height="""&aa/ab&""" />"
+%>
+（意思是：用ASP输出图片，宽度调用aa的结果，高度调用aa除以ab的结果。）
+或者：
+<%
+aa=150
+ab=2
+%>
+<img src="a.jpg" width="<%=aa%>" height="<%=aa/ab%>" />
+（意思是：先用html输出图片，再用ASP调用图片的宽度aa，高度aa/ab。）
+
+【第三节课内容】
+1、添加表单：
+添加表单后，对文本框、单选按钮等设置名称，名称必须是英文字母或字母加数据。
+再对表单设置动作，动作为待显示结果的ASP文件名。
+2、显示表单：
+在动作跳转页中用request.form("表单项名")来读取内容。
+如：aa=request.form("xm")
+意思是：将表单中表单项名为xm的读取到aa变量中。
+然后再用之前学过的输出命令来显示该变量的结果，如：
+response.write aa
+
+【第四节课内容】
+1、表单动作跳转到本页判断：
+表单动作中输入：?变量名称=参数值
+变量名称和参数值都可以随便输入，但变量名称只能用开头字母，参数值最好用英文字母。
+如：
+?a=b
+2、读取表单的动作参数：
+request("变量名称")="参数值"
+如：
+request("a")="b"
+3、用if判断：
+（1）单条件判断：
+if 条件 then
+条件符合的结果
+end if
+（意思是，当条件符合时，就执行条件符合后的结果，否则都不执行）
+（2）多条件判断：
+if 条件1 then
+条件1符合的结果
+elseif 条件2 then
+条件2符合的结果
+elseif 条件3……
+……
+else
+否则的话显示结果
+end if
+（意思是：当条件1符合时，就执行条件1的结果，否则再如果条件2符合时，就执行条件2的结果……否则的话，就执行某个结果。如果没有否则要执行的结果，可以把最后面的else段去除。）
+
+【第五节课内容】
+运算符号+号等同于&号，也就是合并符号。用表单输入的数值都为文本型，如果要将输入的数据相加，需要先将文本型的数据转换成数值型的，常用的数值型有3种：
+整型 cint 值必须是介于 -32768 与 32767 之间的数字。
+长整型 clng 值必须是介于 -2147483648 与 2147483647 之间的数字。
+双精度型 cdbl 最常用，可以计算小数。
+示例：
+<%
+aa=request.form("s1")
+ab=request.form("s2")
+bb=cint(aa)+cdbl(ab)
+response.write bb
+%>
+当文本框s1输入5.5并且文本框s2输入6.6提交后，显示出来的结果是：12.6
+解析步骤：
+aa=5.5
+ab=6.6
+cint(5.5)=6
+cdbl(6.6)=6.6
+ab=6+6.6
+也就是说用cint或clng时，会将输入的数据自动四舍五入成整数再计算。
+而用cdbl时，只会将文本型的数据转换成数值型，还会保留小数位。
+
+【第六节课内容】
+1、表达式运算：
+eval(表达式)
+示例：
+在文本框ss中输入：(1+5)/6提交表单后，计算出结果为1
+代码：
+<%
+aa=request.form("ss")
+response.write eval(aa)
+%>
+2、循环（从数值1到数值2循环）：
+for 变量名=数值1 to 数值2
+循环时执行的内容
+next
+示例：（从1到100分行显示出来）
+<%
+for ii=1 to 100
+response.write ii&"<br>"
+next
+%>
+3、求余数：
+被除数 mod 除数
+示例：（用数值除以2，求出余数，如果余数为1即为奇数，如果余数为0即为偶数。）
+<%
+for aa=1 to 100
+if aa mod 2=1 then
+ab="奇数"
+else
+ab="偶数"
+end if
+response.write aa&ab&"<br>"
+next
+%>
+
+【第七节课内容】
+1、对数据取整数
+int(数值）
+如：int(1.555)=1
+2、对数据四舍五入
+round(数值,四舍五入后要保留的小数位数)
+如：round(2.635,2)=2.64
+3、取文本左边几个字
+left(文本,取几个字)
+如：left("36874546",3)="368"
+4、取文本右边几个字
+right(文本,取几个字)
+如：right("36874546",3)="546"
+5、从文本中间某个位置开始取几个字
+mid(文本,开始的位置,取几个字)
+如：mid("36874546",3,2)="87"
+6、取文本的长度
+len(文本)
+如：len("36874546")=8
+
+【第八节课内容】
+1、查找指定文字在某个字串中的起始位置
+instr(字串,字串中包含的内容)
+如：instr("www.d1kf.com","d1kf")
+结果=4
+意思是：查找文本“d1kf”，在“www.d1kf.com”这个字串中开始的位置是4
+2、替换文本
+replace(原文,原文中包含的内容,替换后的内容)
+如：replace("www.baidu.com","baidu","d1kf")
+结果是：www.d1kf.com
+意思是：先“www.baidu.com”中的“baidu”替换成“d1kf”。
+
+【第九节课内容】
+1、分割文本
+split(原文,分割符号)
+如：aa=split("福建|湖南|江西","|")
+意思是：将“福建|湖南|江西”用中间的“|”号来分割，分割好后，如果要读取第一段“福建”的内容，可以用：aa(0)来完成。
+aa(0) 输出“福建”
+aa(1) 输出“湖南”
+aa(2) 输出“江西”
+aa(3)或其他，会显示错误信息：下标越界。
+示例：
+<%
+aa=split("福建|湖南|江西","|")
+response.write aa(0)
+%>
+2、对分割好的文本计算分割数量
+ubound(分割文本后的变量[也叫数组])
+如：
+aa=split("福建|湖南|江西","|")
+ab=ubound(aa)
+意思是：先分割文本到变量aa中，再计算aa中有几个分割的数量。
+结果是：ab=2 ，因为有2个“|”号。
+3、删除文本首尾的空格
+trim(头尾带空格的文本)
+如：trim("  你好    ")
+输出结果是：你好。也就是头尾的空格会自动被删除。
+
+【第十节课内容】
+1、判断是否为日期格式
+isdate(日期)
+如：isdate("2013-5-1")
+返回的结果是：true （真，对的意思，如果不是日期格式，则返回：false假，错的意思）
+2、判断是否为数值型
+isnumeric(判断的内容)
+示例：
+aa=5
+ab="6"
+ac="你好"
+a1=isnumeric(aa)
+a2=isnumeric(ab)
+a3=isnumeric(ac)
+response.write a1&a2&a3
+输出的结果是：true真true真false假。
+因为aa和ab都是数值，而ac是文本。
+
+【第十一节课内容】
+1、获取当前日期
+date()
+如：<%=date()%>
+输出结果是当前的系统日期，如果把网页放在服务器上，就会显示服务器当前的日期。
+2、获取当前的日期及时间
+now()
+如：<%=now()%>
+输出的结果是当前的系统日期及时间，如果把网页放在服务器上，就会显示服务器当前的日期及时间。
+3、获取日期中的年、月、日
+year(日期)   取年份
+month(日期)  取月数
+day(日期)    取日数
+如：
+year(date()) 或 year(now())  取当前日期中的年份
+month(date()) 或 month(now())  取当前日期中的月数
+day(date()) 或 day(now()) 取当前日期中的日数
+4、取已知日期多久后或多久前的日期
+dateadd(时段变量,数值,已知日期)
+时间段变量有：yyyy (年) 、q (季度) 、m (月) 、y (一年的日数) 、d (日) 、w (一周的日数) 、ww (周) 、h (小时) 、n (分钟) 、s (秒)
+如：今天是2013-10-16
+用<%=dateadd("d",3,date())%>后，输出的日期就是：2013-10-19
+如果用<%=dateadd("d",-3,date())%>后，输出的日期就是：2013-10-16
+意思是：中间的数值为正数的话，就会计算将来的时间，为负数的话，就会计算过去的时间。
+
+【第十二节课内容】
+1、取二个时间或日期之间的间隔
+datediff(时段变量,日期1,日期2)
+如：<%=datediff("d","2013-5-1","2013-5-6")%>
+输出的结果是：5
+如果把大的日期放在第2个参数，小的日期放在第3个参数，那么求出来的结果就是负数。代表已过的时间。
+2、取绝对值
+abs(负数)
+如：<%=abs(-5)%>
+输出的结果就是：5
+意思是将负数转换成正数，如果是正数也用abs的话，就还是正数，不变。
+3、页面缓存
+session(变量名称)=变量值
+如：session("abc")="aaa"
+意思是：创建一个名为abc的页面缓存，并写入内容：aaa。
+注意：变量名称和变量值都可以随便输入。主要是在调用页面要跟写入的页面相符合。
+具体请参照课内的实例。
+4、页面跳转
+response.redirect 待跳转的页面
+如：response.redirect "index.asp"
+当程序执行到这一步时，就会跳转到index.asp这个网页，这句指令下面的语句将不会被执行到。我们一般放在if判断语句中。
+例如：当某条件成立时，就执行什么？否则的话，就跳转到某个页面。
+具体请参照课内所教的登录跳转页面实例。
+
+【第十三节课内容】
+1、ASCII码互转
+chr(数值)  将数值转换成字符
+asc(字符)  将字符转换成数值
+如：chr(65) 结果是：A
+asc("A") 结果是：65
+2、系统缓存
+(1)
+response.cookies("变量名").Expires 设置系统缓存的有效期
+如：response.cookies("abc").Expires=date()+7
+意思是：将变量名称为abc的系统缓存有效期设置为7天。
+(2)
+response.cookies("变量名") 写入系统缓存
+如：response.cookies("abc")="ok"
+意思是：将系统缓存名为abc的设置值为：ok
+(3)
+request.cookies("变量名") 读取系统缓存
+如：response.write request.cookies("abc")
+意思是：输出变量名为abc的系统缓存信息。
+
+【第十四节课内容】
+自定义函数
+function 自定义的函数名(自定义的参数1,参数2……)
+……
+end function
+示例：
+<%
+function abc(aa,ab)
+response.write aa&"|"&ab&"<br>"
+end function
+
+abc("福建","莆田")
+abc("中国","美国")
+%>
+输出的结果是：
+福建|莆田
+中国|美国
+（注意：自定义的函数名和参数名都可以随便设定，只要里面的内容要跟设定的名称相对应即可。）
+
+【第十五节课内容】
+access数据库的使用
+一个网站只用一个数据库，一个数据库中包含多个表，网站中每个栏目对应每个表。
+表中又由字段组成。
+表的名称最少要3个字符或以上。
+表的名称、字段名称不能用汉字，必须是字母开头，不能含特殊符号。
+表的主键一般是用自动编号。
+具体操作可以参考《九天学会ASP》中的第3天。
+
+【第十六节课内容】
+用ASP读取数据库的步骤：
+1、打开数据库
+set conn=server.createobject("adodb.connection")
+conn.open "driver={microsoft access driver (*.mdb)};dbq="&server.mappath("数据库路径及文件名")
+2、打开表
+exec="select * from 表名"
+set rs=server.createobject("adodb.recordset")
+rs.open exec,conn,1,1 
+3、读取记录集
+（1）循环开头：
+<%do while not rs.eof%>
+（2）循环结尾：
+<%rs.movenext
+loop%>
+读取数据完成后，需要关闭数据库，步骤是：
+1、关闭表
+rs.close
+set rs=nothing
+2、关闭数据库
+conn.close
+set conn=nothing
+具体操作可以参考《九天学会ASP》中的第4天。
+
+【第十七节课内容】
+1、根据指定条件读取数据库(课内实例24.asp)：
+在打开表的：exec="select * from 表名"后面加上条件。
+exec="select * from 表名 where 字段名=条件值"
+如：exec="select * from user where id=3" 读取user表中id=3的值。
+或：exec="select * from user where dz='福建'" 读取user表中dz为“福建”的值。
+如果用变量可以这样表示：
+exec="select * from user where id="&request.form("aa")
+或
+exec="select * from user where dz='"&request.form("aa")&"'"
+2、同时读取多个表：
+（1）先打开数据库
+（2）再打开表1
+（3）在表1的循环中再打开表2
+（4）在表1循环结束前再关闭表2
+（5）关闭表1
+（6）关闭数据库
+注意表1和表2中的变量名称不能用相同的。
+具体参考课内实例25.asp。
+
+【第十八节课内容】
+1、循环读取记录时对数据的运算：
+如：
+……
+do while not rs.eof
+……
+aa=aa+rs("jf")
+……
+rs.movenext
+loop
+……
+response.write aa
+（这样aa输出的结果就是字段jf的总和了）
+2、读取记录总数：
+rs.recordcount
+如：sl=rs.recordcount
+（这样sl就是该表中记录的数量）
+3、按关键字搜索：
+在打开表exec="select * from 表名"的后面加上条件，如：
+exec="select * from user where xm like '%张%'"
+（这样就可以找出user表中字段xm中包含“张”的内容出来，例如：小张、张三、李张国……
+如果只要里面的“张XXX”的话，那就用：exec="select * from user where xm like '张%'"，也就是说把前面的%号去除即可。如果去除右边的%号，输出的结果将是：XXXX张。）
+再如：
+exec="select * from user where xm like '%"&request.form("ss")&"%'"
+（这样就可以用表单来实现搜索关键词了。）
+具体可以参考课内实例：26.asp文档。
+
+【第十九节课内容】
+添加记录
+先表单中的数据写入数据库中。
+大体的步骤是：
+（1）创建表单
+（2）代码部分：
+2.1：打开数据库：
+set conn=server.createobject("adodb.connection")
+conn.open "driver={microsoft access driver (*.mdb)};dbq="&server.mappath("数据库")
+2.2：打开表：
+exec="select * from 表名"
+set rs=server.createobject("adodb.recordset")
+rs.open exec,conn,3,3
+注意：rs.open exec,conn,3,3后面的数字是3,3。
+提示：读取记录是用：1,1。修改记录是用1,3。添加记录是用3,3。其中3,3可以说是万能的，因为3,3也可以用在读取记录或修改记录中，但速度比较慢，所以不推荐全用3,3。
+2.3：添加新记录：
+rs.addnew
+注意：用这句话的意思是新建一条空白记录。
+2.4：为空白的记录赋值：
+rs("字段名")=值
+如：
+rs("name")=request.form("xm")
+或：
+rs("ttime")=now()
+2.5：保存记录（更新记录）
+rs.update
+注意：新建空白记录后，赋值，再保存，顺序不能反了。
+2.6：关闭表和数据库：
+rs.close
+set rs=nothing
+conn.close
+set oonn=nothing
+（具体请参考课内实例：27.asp文档）
+
+【第二十节课内容】
+判断记录是否已存在？如果已存在就提示，否则就添加进ACCESS数据库中。
+整体的内容跟上节课相同。
+（1）表单相同
+（2）代码部分：
+2.1：打开数据库相同
+2.2：打开表时，后面加个条件，如：
+exec="select * from 表名 where 字段名='表单项'"
+示例：
+exec="select * from user where name='"&request.form("xm")&"' and dh='"&request.form("dh")&"'"
+set rs=server.createobject("adodb.recordset")
+rs.open exec,conn,3,3
+意思是：打开user表，条件是表中的name=表单中的xm项并且表中的dh=表单中的dh项。
+2.3：判断搜索到的记录是否存在？如果存在，就输出“该记录已存在！”的信息，否则就继续《添加记录》--《赋值记录》--《保存记录》。如：
+if rs.recordcount>0 then
+response.write "该记录已存在！"
+else
+rs.addnew
+rs("name")=request.form("xm")
+rs("xb")=request.form("xb")
+rs("dh")=request.form("dh")
+rs("dz")=request.form("dz")
+rs("dj")=request.form("dj")
+rs.update
+response.write "保存记录成功！"
+end if
+2.4：关闭表和关闭数据库相同
+（具体请参考课内实例：28.asp文档）
+
+【第二十一节课内容】
+1、多个页面合成
+<!--#include file="待合成的页面"-->
+比如有a.asp、b.asp和c.asp三个文件，现在要在b.asp和c.asp中合并a.asp的内容，那么只要在b.asp和c.asp中相应的位置插入代码：<!--#include file="a.asp"-->
+（可以参考课内实例23.asp、28.asp、index.asp中都合并link.asp的实例）
+2、删除记录
+exec="delete * from 表名 where 表中的字段名=条件值"
+conn.execute exec
+示例：
+exec="delete * from aaa where id="&request("id")
+conn.execute exec
+（具体参考课内实例23.asp文档）
+
+【第二十二节课内容】
+跳转页面去判断删除
+在记录后面加上：<a href="#"onclick="javascript:if (confirm('是否删除?')) href='del.asp?d=ok&cc=<%=rs("id")%>';else return;">删除</a>
+在跳转后的页面del.asp中加入判断删除的代码。
+（具体请参考课内实例：29.asp及del.asp文档。）

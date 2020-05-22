@@ -1,0 +1,27 @@
+返回代码：
+1：有弹窗
+<%
+response.write "<script language=JavaScript>" & chr(13) & "alert('注册成功!');" & "window.location.href = 'index.asp'" & "</script>"
+%>
+
+2：无弹窗
+<%
+response.write "<script>window.location.href='a1.asp';</script>" 
+Response.End
+%>
+
+3:后退
+response.write "<script language=JavaScript>" & chr(13) & "alert('用户已存在！');" & "history.back()" & "</script>" 
+Response.End
+
+4:按钮后退
+<form><p><input TYPE="button" VALUE="后退" ONCLICK="history.back(-1)"></p></form> 
+
+5:页面直接跳转
+response.Redirect "aa.asp"
+
+6:带取消的确定：
+<a href="#"onclick="javascript:if (confirm('是否删除?')) href='del.asp';else return;">删除</a>
+
+7:弹窗后关闭：
+response.write "<script language=JavaScript>" & chr(13) & "alert('提交申请成功!请从贵站点击一次进来即可自动审核！');" & "window.close();" & "</script>"

@@ -1,0 +1,31 @@
+添加记录
+先表单中的数据写入数据库中。
+大体的步骤是：
+（1）创建表单
+（2）代码部分：
+2.1：打开数据库：
+set conn=server.createobject("adodb.connection")
+conn.open "driver={microsoft access driver (*.mdb)};dbq="&server.mappath("数据库")
+2.2：打开表：
+exec="select * from 表名"
+set rs=server.createobject("adodb.recordset")
+rs.open exec,conn,3,3
+注意：rs.open exec,conn,3,3后面的数字是3,3。
+提示：读取记录是用：1,1。修改记录是用1,3。添加记录是用3,3。其中3,3可以说是万能的，因为3,3也可以用在读取记录或修改记录中，但速度比较慢，所以不推荐全用3,3。
+2.3：添加新记录：
+rs.addnew
+注意：用这句话的意思是新建一条空白记录。
+2.4：为空白的记录赋值：
+rs("字段名")=值
+如：
+rs("name")=request.form("xm")
+或：
+rs("ttime")=now()
+2.5：保存记录（更新记录）
+rs.update
+注意：新建空白记录后，赋值，再保存，顺序不能反了。
+2.6：关闭表和数据库：
+rs.close
+set rs=nothing
+conn.close
+set oonn=nothing

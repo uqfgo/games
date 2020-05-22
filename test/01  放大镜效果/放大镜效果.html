@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>放大镜效果</title>
+		<link rel='stylesheet' type='text/css' href='index.css' />
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="maxBox">
+				<img src='img/1.jpg' width='0' height='0' />
+				<div id='b1'></div>
+				<div id='MoveShade'></div>
+			</div>
+			<div id="minBox">
+				<ul>
+					<li style='border:2px solid #f60'><img src='img/1.jpg' width='0' height='0' /></li>
+					<li><img src='img/2.jpg' width='0' height='0' /></li>
+					<li><img src='img/3.jpg' width='0' height='0' /></li>
+					<li><img src='img/4.jpg' width='0' height='0' /></li>
+					<li><img src='img/5.jpg' width='0' height='0' /></li>
+				</ul>
+			</div>
+		</div>
+		<script type='text/javascript'>
+			var maxBox = document.getElementById('maxBox');
+			var MaxI = maxBox.getElementsByTagName('img')[0];
+			var MoveShade = document.getElementById('MoveShade');
+			var sLi = document.getElementById('minBox').getElementsByTagName('ul')[0].getElementsByTagName('li');
+			var b1 = document.getElementById('b1');
+			//初始化
+			window.onload = function(){
+				Int();
+				//刚开始的时候就执行一遍
+				Scale({
+					URL : 'img/1.jpg',
+					TagGetW : 400,
+					TagGetH : 400,
+					Obj : MaxI,
+				});
+				MaxI.style.marginTop = -(MaxI.height/2)+'px';
+				MaxI.style.marginLeft = -(MaxI.width/2)+'px';
+			};
+			function Int(){
+				//-----------小图片
+				for(var i=0;i<sLi.length;i++){
+					//图片点击事件
+					sLi[i].index = i;
+					sLi[i].onmouseover = function(){
+						for(var j=0;j<sLi.length;j++){
+							sLi[j].style.border = '2px solid transparent';
+						};
+						this.style.border = '2px solid #f60';
+						//更改大图片的src/居中
+						MaxI.src = 'img/'+(this.index+1)+'.jpg';
+						b1.style.backgroundImage = 'url("img/'+ (this.index+1) +'.jpg")'
+						MaxImgScale(this.index);
+						MaxI.style.marginTop = -(MaxI.height/2)+'px';
+						MaxI.style.marginLeft = -(MaxI.width/2)+'px';
+					};
+					//图片比例缩放
+					var sImg = sLi[i].getElementsByTagName('img')[0];
+					var urlImg = 'img/'+ (i+1) +'.jpg';
+						 Scale({
+							URL : urlImg,
+							TagGetW : 50,
+							TagGetH : 50,
+							Obj : sImg,
+						});
+					//图片居中
+					sImg.style.marginTop = -(sImg.height/2)+'px';
+					sImg.style.marginLeft = -(sImg.width/2)+'px';
+				};
+				//----------大图片
+				function MaxImgScale(n){
+					Scale({
+						URL : 'img/'+ (n+1) +'.jpg',
+						TagGetW : 400,
+						TagGetH : 400,
+						Obj : MaxI,
+					});
+				};
+			};
+			//遮罩层移动
+			MaxI.onmouseover = function(ev){
+				ev = ev || window.event;
+				MoveShade.style.display = 'block';
+				MoveShade.style.width = this.offsetWidth/2+'px';
+				MoveShade.style.height = this.offsetWidth/2+'px';
+				b1.style.display = 'block';
+				var BoxL = maxBox.offsetLeft,
+					BoxT = maxBox.offsetTop;
+				var MoveW = MoveShade.offsetWidth,
+					MoveH = MoveShade.offsetHeight;
+				var MaxL = MaxI.offsetLeft,
+					MaxT = MaxI.offsetTop,
+					MaxW = MaxI.offsetWidth,
+					MaxH = MaxI.offsetHeight;
+				var Nx = ev.pageX-BoxL-(MoveW/2),
+					Ny = ev.pageY-BoxT-(MoveH/2);
+				MoveShade.style.left = Nx+'px';
+				MoveShade.style.top = Ny+'px';
+				MoveShade.onmousemove = function(ev){
+					ev = ev || window.event;
+					Nx = ev.pageX-BoxL-(MoveW/2);
+					Ny = ev.pageY-BoxT-(MoveH/2);
+					Nx = Math.max(Nx,(0+MaxL));
+					Nx = Math.min(Nx,(MaxL+MaxW-MoveW));
+					Ny = Math.max(Ny,(0+MaxI.offsetTop));
+					Ny = Math.min(Ny,(MaxH-MoveH));
+					MoveShade.style.left = Nx +'px';
+					MoveShade.style.top = Ny +'px';
+					var nX = Math.floor(MaxW/MoveW);
+					var nY = Math.floor(MaxH/MoveH);
+					b1.style.backgroundPosition = (-(((Nx-MaxL)/MaxW)*MaxW*nX)) + 'px '+ (-(((Ny/MaxH)*MaxH*nY))+1) +'px';
+					this.onmouseout = function(){
+						this.style.display = 'none';
+						b1.style.display = 'none';
+					};
+				};
+			};
+			//封装的等比例缩放图片
+			function Scale(Json){
+				//------Json传四个参数------
+				var Jurl = Json.URL;				//原图的URL
+				var obj = Json.Obj;					//之后要赋新值的对象
+				var Tw = Json.TagGetW;				//目标的宽
+				var Th = Json.TagGetH;				//目标的高
+				//----------分隔线-----------
+				var Nw = 0;							//按比例缩放的宽
+				var Nh = 0;							//按比例缩放的高
+				var oImg = new Image();
+					oImg.src = Jurl;
+					var Iw = oImg.width;			//图片的原宽
+					var Ih = oImg.height;			//图片的原高
+				if(Ih>Iw){
+					Nw = Tw/Ih*Iw;
+					Nh = Th;
+				}else{
+					Nh = Th/Iw*Ih;
+					Nw = Tw;
+				};
+				//----------赋新值------------
+				obj.width = Nw;
+				obj.height = Nh;
+				/* 
+					因为获取原图的宽高的原故必须先加载完图片后才能执行该函数
+						图片的宽/高为800/1200
+						目标的宽/高为400/400
+						比例的：
+							当原图的高大于原图的宽的时候 新宽：目标的宽/原图的高*原图的宽
+							当原图的宽大于原图的高的时候 新高：目标的高/原图的宽*原图的高
+				 */
+			};
+		</script>
+	</body>
+</html>
