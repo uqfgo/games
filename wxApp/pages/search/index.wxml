@@ -1,0 +1,17 @@
+<view class="wrap">
+
+    <view class="search">
+        <input value="{{Value}}" placeholder='请输入您要搜索的商品' bindinput="handInput" />
+        <view bindtap='cancel'>取消</view>
+    </view>
+
+    <view class="showData">
+        <view
+        wx:for="{{goods}}"
+        wx:key='goods_id'
+        >
+            <navigator url='/pages/goods_detail/index?goods_id={{item.goods_id}}'>{{item.goods_name}}</navigator>
+        </view>
+    </view>
+
+</view>

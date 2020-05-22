@@ -1,0 +1,61 @@
+view {
+    /* 使用主题颜色 */
+    /* color: var(--themeColor) */
+    
+}
+
+// 轮播图
+.index_swiper {
+    swiper {
+        height: 340rpx;
+        image {
+            width: 100%;
+        }
+    }
+}
+
+// 导航
+.index_nav {
+    display: flex;
+    navigator {
+        flex: 1;
+        padding: 20rpx;
+        image {
+            width: 100%;
+        }
+    }
+}
+
+// 楼层
+.index_floot{
+    .floot_group{
+        .groups_title{
+            padding: 8rpx 0;
+            width: 100%;
+        }
+        .groups_content{
+            overflow: hidden;
+            navigator{
+                float: left;
+                width: 33.33%;
+                image{
+                    width: 100%;
+                }
+                &:nth-last-of-type(-n+4){
+                    // 原图的宽高：232 386
+                    // 原图的宽被改变为：33.33vw 386
+                    // 由此得出原图的高 33.33vw * 386 / 232 
+                    height: 33.33vw * 386 / 232 /2;
+                    border-left: 10rpx solid #fff;
+                    image {
+                        height: 100%;
+                    }
+                }
+                &:nth-last-of-type(-n+2){
+                    border-top: 10rpx solid #fff;
+                }
+            }
+            
+        }
+    }
+}

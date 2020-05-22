@@ -1,0 +1,37 @@
+/* pages/category/index.wxss */
+.category .classify {
+  display: flex;
+  text-align: center;
+  color: #888;
+  height: calc(100vh - 90rpx);
+}
+.category .classify .left_title {
+  flex: 3;
+  background-color: #f0f0f0;
+}
+.category .classify .left_title view {
+  width: 100%;
+  height: 8vh;
+  line-height: 8vh;
+}
+.category .classify .left_title .active {
+  color: #f60;
+  background-color: #fff;
+}
+.category .classify .right_content {
+  flex: 8;
+}
+.category .classify .right_content view .assemble .assemble_some {
+  padding: 30rpx 0 0 0;
+}
+.category .classify .right_content view .assemble .assemble_some .some_content {
+  overflow: hidden;
+}
+.category .classify .right_content view .assemble .assemble_some .some_content .Navigator {
+  padding: 20rpx;
+  float: left;
+  width: 33.33%;
+}
+.category .classify .right_content view .assemble .assemble_some .some_content .Navigator image {
+  width: 100%;
+}

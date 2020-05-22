@@ -1,0 +1,54 @@
+<view class='category'>
+    <!-- 搜索框 -->
+    <searchInput></searchInput>
+
+    <!-- 分类 -->
+    <view class='classify'>
+        <!-- 左标题 -->
+        <scroll-view scroll-y='true' class="left_title">
+            <view class="{{ isIndex === index ? 'active' : '' }}"
+            wx:for="{{ leftData }}"
+            wx:key="cat_id"
+            data-index='{{ index }}'
+            bindtap='Tap'
+            >
+                {{ item }}
+            </view>
+        </scroll-view>
+        <!-- 右内容 -->
+        <scroll-view scroll-y='true' scroll-top='{{ scrollTop }}' class="right_content">
+            <view>
+                <view class='assemble'>
+                    <view class='assemble_some'
+                    wx:for="{{ rightData }}"
+                    wx:for-item='item1'
+                    wx:for-index='index1'
+                    wx:key='*this'
+                    >
+                        <view class="some_title">
+                            / {{ item1.cat_name }} /
+                        </view>
+                        <view class="some_content">
+                            <navigator class='Navigator'
+                            wx:for="{{ item1.children }}"
+                            wx:for-item="item2"
+                            wx:for-index='index2'
+                            wx:key='*this'
+                            url='/pages/goods_list/index?cid={{ item2.cat_id }}'
+                            >
+                               <image class="" src=" {{ item2.cat_icon }}" mode="widthFix" lazy-load="false" binderror="" bindload="" />
+                                 
+                                {{ item2.cat_name }}
+                            </navigator>
+                              
+                        </view>
+                    </view>
+                      
+                </view>
+                  
+            </view>
+        </scroll-view>
+    </view>
+      
+</view>
+  

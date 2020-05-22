@@ -1,0 +1,55 @@
+<view class="wrap">
+    <view wx:if="{{!loginCondition}}">
+        <button bindtap='skipLogin'>登陆</button>
+    </view>
+    <view wx:else class='user'>
+        <!-- 头像 -->
+        <view class="head">
+            <view class="head_top">
+                <view class='Img'><image mode="widthFix" src="{{userInfo.avatarUrl}}" /></view>
+                <view class='txt'>{{userInfo.nickName}}</view>
+            </view>
+            <view class="head_back"><image mode="widthFix" src="{{userInfo.avatarUrl}}" /></view>
+        </view>
+
+        <!-- 导航栏 -->
+        <view class="nav">
+            <view><text>0</text>收藏的店铺</view>
+            <view bindtap='collectGoods' data-index='2'><text>{{collectData.length}}</text>收藏的商品</view>
+            <view><text>0</text>关注的商品</view>
+            <view><text>0</text>我的足迹</view>
+        </view>
+
+        <!-- 内容 -->
+        <view class="main">
+
+            <view class='identical'>我的订单</view>
+            <view class='menu'>
+                <view>
+                    <text class='iconfont icon-ding_dan'></text>
+                    全部订单
+                </view>
+                <view>
+                    <text class='iconfont icon-fukuantongzhi'></text>
+                    待付款
+                </view>
+                <view>
+                    <text class='iconfont icon-receipt-address'></text>
+                    待收货
+                </view>
+                <view>
+                    <text class='iconfont icon-tuihuotuikuan_dianpu'></text>
+                    退款/退货
+                </view>
+            </view>
+            <view class='identical style1'>收货地址管理</view>
+            <view class='identical'><button open-type="contact"></button>联系客服<text class='tel'>400-168-4000</text></view>
+            <view class='identical'><button open-type="feedback"></button>意见反馈</view>
+            <view class='identical'>关于我们</view>
+            <view class='identical style1'>把应用推荐给其他人</view>
+            <view class='identical style1' bindtap='drop'>退出登陆</view>
+
+        </view>
+    
+    </view>
+</view>

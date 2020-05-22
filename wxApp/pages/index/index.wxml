@@ -1,0 +1,58 @@
+<!-- 搜索框 -->
+<searchInput></searchInput>
+
+<!-- 轮播图 -->
+<view class='index_swiper'>
+    <swiper indicator-dots autoplay circular interval='2000'>
+        <swiper-item 
+        wx:for="{{swiperList}}"
+        wx:key="goods_id"
+        >
+            <navigator url='{{item.navigator_url}}'>
+                <image mode='widthFix' src='{{ item.image_src }}' />
+            </navigator>
+        </swiper-item>
+    </swiper>
+</view>
+
+<!-- 导航 -->
+<view class='index_nav'>
+    <navigator 
+    wx:for="{{ navData }}"
+    wx:key='name'
+    url='/pages/category/index'
+    open-type="switchTab"
+    >
+        <image class="" src="{{ item.image_src }}" mode="widthFix"  />
+    </navigator>
+</view>
+
+<!-- 楼层 -->
+<view class="index_floot">
+    <view class='floot_group'
+    wx:for="{{ flootData }}"
+    wx:key='floor_title'
+    >
+        <!-- 标题 -->
+        <view class="groups_title">
+            <image class="" src="{{ item.floor_title.image_src }}" mode="widthFix" />
+
+        </view>
+        <!-- 内容 -->
+        <view class="groups_content">
+            <navigator
+            url='{{item1.navigator_url}}'
+            wx:for="{{item.product_list}}"
+            wx:key='product_list'
+            wx:for-item='item1'
+            wx:for-index='index1'
+            
+            >
+                <image mode='{{ index1 === 0 ? "widthFix" : "scaleToFill" }}' src='{{ item1.image_src }}' />
+            </navigator>
+              
+        </view>
+    </view>
+      
+</view>
+  

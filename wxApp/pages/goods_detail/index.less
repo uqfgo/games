@@ -1,0 +1,100 @@
+.banner_wrap{
+    swiper{
+        height: 65vw;
+        text-align: center;
+        image{
+            width: 60%;
+        }
+    }
+}
+
+.goods_price{
+    font-size: 18px;
+    color: var(--themeColor);
+    padding: 10rpx 0;
+}
+
+.goods_name_row{
+    display: flex;
+    padding: 30rpx 0;
+    border-top: 1rpx solid #dedede;
+    border-bottom: 1rpx solid #dedede;
+    .goods_name{
+        flex: 80%;
+        padding: 0 20rpx;
+    
+        // 当文字超过2行的时候隐藏
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+    .goods_collect{
+        border-left: 1px solid #dedede;
+        flex: 15%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.goods_info{
+    padding-bottom: 13vw;
+    .goods_info_title{
+        font-size: 21px;
+        font-weight: 900;
+        color: var(--themeColor);
+        padding: 30rpx 0;
+        text-align: center;
+    }
+    .goods_info_content{
+        border-top: 10rpx solid #dedede;
+    }
+}
+
+
+.bottom_tool{
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    border-top: 1rpx solid #ccc;
+    width: 100%;
+    height: 13vw;
+    background-color: #fff;
+    .items{
+        position: relative;
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 21rpx;
+        button{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+    }
+
+    .items2{
+        flex: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--themeColor);
+        color: #fff;
+        font-weight: 600;
+    }
+    
+    .join_Shopping_Cart{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffa300;
+    }
+}

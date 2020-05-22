@@ -1,0 +1,23 @@
+<Tabs tabs='{{tabs}}' bindtabitemChange='TabitemChange'>
+    <block wx:if='{{tabs[0].isActive}}'>{{tabs[0].name+'为空'}}</block>
+    <block wx:elif='{{tabs[1].isActive}}'>
+        <view class='first_tab' wx:if="{{item.goods_id}}">
+            <navigator url='' class='goods_item'
+            wx:for="{{collectGoods}}"
+            wx:key='goods_id'
+            url='/pages/goods_detail/index?goods_id={{item.goods_id}}'
+            >
+                <view class="goods_img">
+                    <image mode="widthFix" src="{{item.goods_big_logo?item.goods_big_logo:'https://ww1.sinaimg.cn/large/007rAy9hgy1g24by9t530j30i20i2glm.jpg'}}" />
+                </view>
+                <view class="goods_info">
+                    <view class="goods_name">{{item.goods_name}}</view>
+                    <view class="goods_price">${{item.goods_price}}</view>
+                </view>
+            </navigator>   
+        </view>
+        <view class='empty' wx:else>收藏的商品为空</view>
+    </block>
+    <block wx:elif='{{tabs[2].isActive}}'>{{tabs[2].name+'为空'}}</block>
+    <block wx:else='{{tabs[3].isActive}}'>{{tabs[3].name+'为空'}}</block>
+</Tabs>

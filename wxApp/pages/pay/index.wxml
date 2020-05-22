@@ -1,0 +1,63 @@
+<view class="wrap">
+    <!-- 获取地址 -->
+
+    <view class='Address'>
+       <view wx:if="{{Address}}">
+            <view>
+            收货人信息与地址
+            </view>
+
+            <view>
+                姓名：{{Address.userName}}
+            </view>
+
+            <view>
+                地址：{{Address.provinceName + Address.cityName + Address.countyName + Address.detailInfo}}
+            </view>
+
+            <view>
+                电话：{{Address.telNumber}}
+            </view>
+       </view>
+
+       <view wx:else bindtap='address'>
+           点击获取地址
+       </view>
+
+    </view>
+
+    <!-- 购物车 -->
+    <view class='shopping_wrap'>
+        <view class="shopping_title">以下是要购买的商品</view>
+
+        <view class="shopping_item" wx:for="{{goods}}" wx:key="goods_id">
+
+            <view class="goods_image">
+                <image class="" src="{{item.goods_image}}" mode="widthFix" />
+            </view>
+            <view class="goods_info">
+                <view class="Info_name">{{item.goods_name}}</view>
+                <view class="Info_price">￥{{item.goods_price}}</view>
+                <view class="Info_num">
+                    <view>数量: {{item.goods_num}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 底部结算栏 -->
+    <view class="footer">
+
+        <view class="f_content">
+            <view>合计：<text>￥ {{totalPrice}}</text></view>
+            <view>包含运费</view>
+        </view>
+
+        <view class="f_right">
+            结算<text wx:if='{{totalNum}}'>({{totalNum}})</text>
+            <button bindtap='btnClick'></button>
+        </view>
+
+    </view>
+</view>

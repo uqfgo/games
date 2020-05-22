@@ -1,0 +1,121 @@
+.wrap {
+  background-color: #eaeae6;
+}
+.wrap .user {
+  position: relative;
+  /* 头像 */
+  /* 导航栏 */
+  /* 内容 */
+}
+.wrap .user .head {
+  position: relative;
+  overflow: hidden;
+  height: 38vh;
+}
+.wrap .user .head .head_top {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #fff;
+  padding: 20rpx 0;
+}
+.wrap .user .head .head_top .Img {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.wrap .user .head .head_top .Img image {
+  width: 100%;
+}
+.wrap .user .head .head_top .txt {
+  padding: 30rpx 0;
+  text-align: center;
+}
+.wrap .user .head .head_back {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+.wrap .user .head .head_back image {
+  width: 100%;
+  filter: blur(10rpx);
+}
+.wrap .user .nav {
+  position: absolute;
+  top: 33vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 94%;
+  background-color: #fff;
+}
+.wrap .user .nav view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 10rpx 0;
+}
+.wrap .user .nav view text {
+  padding: 3rpx 0;
+  color: var(--themeColor);
+}
+.wrap .user .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 8vw;
+}
+.wrap .user .main .identical {
+  position: relative;
+  z-index: 2;
+  width: 94%;
+  height: 10vw;
+  line-height: 10vw;
+  padding: 0 30rpx;
+  background-color: #fff;
+  border-top: 1rpx solid #dedede;
+  border-bottom: 1rpx solid #dedede;
+}
+.wrap .user .main .identical .tel {
+  padding: 0 10rpx 0 320rpx;
+}
+.wrap .user .main .identical button {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.wrap .user .main .style1 {
+  margin: 20rpx 0;
+}
+.wrap .user .main .menu {
+  display: flex;
+  width: 94%;
+  background-color: #fff;
+}
+.wrap .user .main .menu > view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15rpx 0;
+}
+.wrap .user .main .menu > view > text {
+  padding: 8rpx 0;
+  font-size: 48rpx;
+}

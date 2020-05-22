@@ -1,0 +1,59 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/category/index",
+        "pages/goods_list/index",
+        "pages/goods_detail/index",
+        "pages/cart/index",
+        "pages/collect/index",
+        "pages/order/index",
+        "pages/search/index",
+        "pages/user/index",
+        "pages/feedback/index",
+        "pages/login/index",
+        "pages/auth/index",
+        "pages/pay/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#f60",
+        "navigationBarTitleText": "项目实战",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#ccc",
+        "selectedColor": "#f80",
+        "backgroundColor": "rgba(0, 0, 0, .2)",
+        "position": "bottom",
+        "borderStyle": "white",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "iconImages/1-1.png",
+                "selectedIconPath": "iconImages/1.png"
+            },
+            {
+                "pagePath": "pages/category/index",
+                "text": "分类",
+                "iconPath": "iconImages/2.png",
+                "selectedIconPath": "iconImages/2.png"
+            },
+            {
+                "pagePath": "pages/cart/index",
+                "text": "购物车",
+                "iconPath": "iconImages/4.png",
+                "selectedIconPath": "iconImages/4-1.png"
+            },
+            {
+                "pagePath": "pages/user/index",
+                "text": "个人中心",
+                "iconPath": "iconImages/5.png",
+                "selectedIconPath": "iconImages/5.png"
+            }
+        ]
+    },
+
+
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
+}
